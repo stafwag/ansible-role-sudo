@@ -1,0 +1,44 @@
+---
+# tasks file for sudo
+
+- name: set OS related variables
+  include_vars: '{{ item }}'
+  with_first_found:
+    - '{{ ansible_distribution }}-{{ ansible_distribution_major_version }}.yml'
+    - '{{ ansible_distribution }}.yml'
+    - '{{ ansible_os_family }}.yml'
+    - defaults.yml
+
+- name: install sudo packages
+  package:
+    name: '{{ item }}'
+    state: present
+  with_items: "{{ sudo_packages }}"
+
+- name: ensure '{{ sudo_sudoers_d }}' exists
+  file:
+    path: '{{ sudo_sudoers_d }}'
+    state: directory
+    owner: 0
+    group: 0
+    mode: '0750'
+
+- name: enable sudo_sudoers_d
+  lineinfile:
+    path: '{{ sudo_sudoers }}'
+    regexp: '#includedir {{ sudo_sudoers_d }}'
+    line:  '#includedir {{ sudo_sudoers_d }}'
+    state: present
+    validate: '{{ sudo_visudo }} -cf %s'
+
+- name: set up sudoers_linesinfile
+  include_tasks: 'sudoers_linesinfile.yml'
+  when:
+    - sudo is defined
+    - sudo.sudoers_linesinfile is defined
+
+- name: set up sudoers_d_files
+  include_tasks: 'sudoers_d_files.yml'
+  when:
+    - sudo is defined
+    - sudo.sudoers_d_files is defined

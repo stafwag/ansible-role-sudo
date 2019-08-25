@@ -1,0 +1,12 @@
+- name: processing '{{ sudo_file.name }}'
+  copy:
+    dest: '{{ sudo_sudoers_d }}/{{ sudo_file.path }}'
+    content: '{{ sudo_file.content | default(omit) }}'
+    backup: '{{ sudo_file.backup | default(omit) }}'
+    owner: 0
+    group: 0
+    mode: 0400
+    validate: '{{ sudo_visudo }} -cf %s'
+  with_items: '{{ sudo.sudoers_d_files }}'
+  loop_control:
+    loop_var: sudo_file

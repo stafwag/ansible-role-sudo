@@ -1,0 +1,11 @@
+- name: linein sudoers file
+  lineinfile:
+    path: '{{ sudo_sudoers }}'
+    regexp: "{{ sudoers_lineinfile.regexp | default(omit) }}"
+    state: "{{ sudoers_lineinfile.state | default(omit) }}"
+    line: "{{ sudoers_lineinfile.line | default(omit) }}"
+    backup: "{{ sudoers_lineinfile.backup | default(omit) }}"
+    validate: '{{ sudo_visudo }} -cf %s'
+  with_items: "{{ sudo.sudoers_linesinfile | default([]) }}"
+  loop_control:
+    loop_var: sudoers_lineinfile

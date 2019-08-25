@@ -1,0 +1,7 @@
+---
+sudo_packages:
+  - sudo
+sudo_sudoers: /usr/pkg/etc/sudoers
+sudo_sudoers_d: /usr/pkg/etc/sudoers.d
+sudo_root_group: wheel
+sudo_visudo: /usr/pkg/sbin/visudo
