@@ -19,8 +19,8 @@
   file:
     path: '{{ sudo_sudoers_d }}'
     state: directory
-    owner: 0
-    group: 0
+    owner: '0'
+    group: '0'
     mode: '0750'
 
 - name: enable sudo_sudoers_d
