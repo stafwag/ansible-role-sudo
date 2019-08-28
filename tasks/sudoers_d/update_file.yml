@@ -1,0 +1,20 @@
+- name: "delete {{ sudo_file.path }}"
+  file:
+    path: '{{ sudo_sudoers_d }}/{{ sudo_file.path }}'
+    backup: "{{ sudo_file.backup | default(omit) }}"
+    state: absent
+  when:
+    - sudo_file.state is defined
+    - sudo_file.state == "absent"
+
+- name: "create {{ sudo_file.path }}"
+  copy:
+    dest: '{{ sudo_sudoers_d }}/{{ sudo_file.path }}'
+    content: '{{ sudo_file.content | default(omit) }}'
+    backup: '{{ sudo_file.backup | default(omit) }}'
+    owner: '0'
+    group: '0'
+    mode: '0400'
+    validate: '{{ sudo_visudo }} -cf %s'
+  when:
+    ( sudo_file.state is not defined ) or ( sudo_file.state == "present" )
