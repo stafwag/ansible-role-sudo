@@ -14,7 +14,7 @@
     backup: '{{ sudo_file.backup | default(omit) }}'
     owner: '0'
     group: '0'
-    mode: '0400'
+    mode: '0440'
     validate: '{{ sudo_visudo }} -cf %s'
   when:
     ( sudo_file.state is not defined ) or ( sudo_file.state == "present" )

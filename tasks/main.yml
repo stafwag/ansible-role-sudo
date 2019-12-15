@@ -2,18 +2,26 @@
 # tasks file for sudo
 
 - name: set OS related variables
-  include_vars: '{{ item }}'
+  include_vars: '{{ os_vars }}'
   with_first_found:
     - '{{ ansible_distribution }}-{{ ansible_distribution_major_version }}.yml'
     - '{{ ansible_distribution }}.yml'
     - '{{ ansible_os_family }}.yml'
     - defaults.yml
+  loop_control:
+    loop_var: os_vars
 
 - name: install sudo packages
-  package:
-    name: '{{ item }}'
-    state: present
-  with_items: "{{ sudo_packages }}"
+  include_tasks: '{{ install_sudo }}'
+  with_first_found:
+    - 'install_sudo/{{ ansible_distribution }}-{{ ansible_distribution_version }}.yml'
+    - 'install_sudo/{{ ansible_distribution }}-{{ ansible_distribution_major_version }}.yml'
+    - 'install_sudo/{{ ansible_distribution }}.yml'
+    - 'install_sudo/{{ ansible_os_family }}.yml'
+    - install_sudo/defaults.yml
+  loop_control:
+    loop_var: install_sudo
+  when: sudo_packages is defined
 
 - name: ensure '{{ sudo_sudoers_d }}' exists
   file:
