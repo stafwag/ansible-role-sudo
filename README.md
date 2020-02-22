@@ -36,7 +36,12 @@ The following variables are set by the role.
 ## Role templates
 
 * **sudo_root_group_with_password**: template to allow the ***sudo_root_group*** to execute commands as root with password authentication.
+
   template content: ```%{{ sudo_root_group }} ALL=(ALL) ALL```
+* **sudo_root_group_with_no_password**: template to allow the ***sudo_root_group*** to execute commands as root with password authentication.
+
+  template content: ```%{{ sudo_root_group }} ALL=(ALL) NOPASSWD: ALL```
+
 
 ## Dependencies
 

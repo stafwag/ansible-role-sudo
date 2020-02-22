@@ -1,0 +1,5 @@
+---
+sudo_sudoers: /etc/opt/csw/sudoers
+sudo_sudoers_d: /etc/opt/csw/sudoers.d
+sudo_root_group: wheel
+sudo_visudo: /opt/csw/sbin/visudo
