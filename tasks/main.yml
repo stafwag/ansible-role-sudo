@@ -1,6 +1,5 @@
 ---
 # tasks file for sudo
-
 - name: set OS related variables
   include_vars: '{{ os_vars }}'
   with_first_found:
@@ -8,6 +7,7 @@
     - '{{ ansible_distribution }}-{{ ansible_distribution_major_version }}.yml'
     - '{{ ansible_distribution }}.yml'
     - '{{ ansible_os_family }}.yml'
+    - '{{ ansible_os_family | replace ("/","_") | replace(" ","_") }}.yml'
     - defaults.yml
   loop_control:
     loop_var: os_vars
@@ -19,6 +19,7 @@
     - 'install_sudo/{{ ansible_distribution }}-{{ ansible_distribution_major_version }}.yml'
     - 'install_sudo/{{ ansible_distribution }}.yml'
     - 'install_sudo/{{ ansible_os_family }}.yml'
+    - 'install_sudo/{{ ansible_os_family | replace ("/","_") | replace(" ","_") }}.yml'
     - install_sudo/defaults.yml
   loop_control:
     loop_var: install_sudo
