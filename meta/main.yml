@@ -1,5 +1,7 @@
+---
 galaxy_info:
   role_name: sudo
+  namespace: stafwag
   author: staf wagemakers <staf@wagemakers.be>
   description: An ansible role to manage sudo
   license: license (BSD, MIT)
@@ -30,6 +32,9 @@ galaxy_info:
       versions:
         - all
     - name: OpenBSD
+      versions:
+        - all
+    - name: NetBSD
       versions:
         - all
   galaxy_tags:
