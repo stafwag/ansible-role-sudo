@@ -1,7 +1,0 @@
----
-sudo_packages:
-  - sudo
-sudo_sudoers: /etc/sudoers
-sudo_sudoers_d: /etc/sudoers.d
-sudo_root_group: sudo
-sudo_visudo: /usr/sbin/visudo
