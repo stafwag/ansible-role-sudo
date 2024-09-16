@@ -1,5 +1,6 @@
-- name: install sudo packages
-  include_tasks: install_pkg_with_yum.yml
-  with_items: '{{ sudo_packages }}'
+---
+- name: Install sudo packages
+  ansible.builtin.include_tasks: install_pkg_with_yum.yml
+  with_items: "{{ sudo_packages }}"
   loop_control:
     loop_var: pkg

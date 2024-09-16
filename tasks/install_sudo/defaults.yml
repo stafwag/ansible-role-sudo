@@ -1,5 +1,6 @@
-- name: install sudo packages
-  package:
-    name: '{{ item }}'
+---
+- name: Install sudo packages
+  ansible.builtin.package:
+    name: "{{ item }}"
     state: present
-  with_items: '{{ sudo_packages }}'
+  with_items: "{{ sudo_packages }}"
