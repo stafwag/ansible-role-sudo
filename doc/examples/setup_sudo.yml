@@ -1,0 +1,16 @@
+---
+- name: configure the systems
+  hosts: all
+  become: true
+  vars:
+    sudo:
+      sudoers_linesinfile:
+        - name: Remove targetpw
+          regexp: "^Defaults targetpw"
+          state: absent
+        - name: dont be nice
+          regexp: '^Defaults insults'
+          line: 'Defaults insults'
+          state: present
+  roles:
+        - stafwag.sudo
