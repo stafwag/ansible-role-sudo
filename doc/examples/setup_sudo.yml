@@ -1,6 +1,6 @@
 ---
-- name: configure the systems
-  hosts: all
+- name: Setup sudo
+  hosts: localhost
   become: true
   vars:
     sudo:
