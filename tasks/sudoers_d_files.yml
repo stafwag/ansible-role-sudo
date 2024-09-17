@@ -1,3 +1,4 @@
+---
 - name: "Processing {{ sudo_file.path }}"
   ansible.builtin.include_tasks: "sudoers_d/update_file.yml"
   with_items: "{{ sudo.sudoers_d_files }}"
