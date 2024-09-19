@@ -1,9 +1,11 @@
-- name: verify if '{{ pkg }}' package is installed
-  command: rpm -q '{{ pkg }}'
+---
+- name: Verify if the sudo package is installed
+  ansible.builtin.command: "rpm -q {{ pkg }}" # noqa command-instead-of-module
   register: pkg_installed
-  ignore_errors: True
-  changed_when: 'pkg_installed.rc != 0'
+  ignore_errors: true
+  changed_when: "pkg_installed.rc != 0"
 
-- name: install '{{ pkg }}'
-  command: yum install -y '{{ pkg }}'
-  when: 'pkg_installed.rc != 0'
+- name: Install the sudo package
+  ansible.builtin.command: "yum install -y {{ pkg }}" # noqa command-instead-of-module
+  changed_when: true
+  when: "pkg_installed.rc != 0"

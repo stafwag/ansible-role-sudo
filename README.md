@@ -6,6 +6,40 @@ An ansible role to manage sudo
 
 sudo
 
+### Supported platforms
+
+* Archlinux
+* Debian
+* FreeBSD
+* NetBSD
+* OpenBSD
+* RedHat
+* Suse
+
+## Installation
+
+### Ansible galaxy
+
+The role is available on [Ansible Galaxy](https://galaxy.ansible.com/ui/standalone/roles/stafwag/package_update/).
+
+To install the role from Ansible Galaxy execute the command below. 
+
+```bash
+ansible-galaxy install stafwag.sudo
+```
+### Source Code
+
+If you want to use the source code directly.
+
+Clone the role source code.
+
+```bash
+$ git clone https://github.com/stafwag/ansible-role-sudo
+```
+
+and put into the [role search path](https://docs.ansible.com/ansible/2.4/playbooks_reuse_roles.html#role-search-path)
+
+
 ## Role Variables
 
 ### OS related variables
